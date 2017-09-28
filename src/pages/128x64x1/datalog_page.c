@@ -143,7 +143,7 @@ void PAGE_DatalogInit(int page)
     seltype = 0;
     int count = DL_SOURCE + DLOG_LAST - (NUM_TELEM - TELEMETRY_GetNumTelemSrc()); //Remove unused telemetry
     GUI_CreateLabelBox(&gui->remaining, 0, 0,
-        LCD_WIDTH, LINE_HEIGHT, &TITLE_FONT, remaining_str_cb, NULL, NULL);
+        LCD_WIDTH, HEADER_HEIGHT, &TITLE_FONT, remaining_str_cb, NULL, NULL);
     GUI_CreateScrollable(&gui->scrollable, 0, HEADER_HEIGHT, LCD_WIDTH, LCD_HEIGHT - HEADER_HEIGHT,
                          LINE_SPACE, count, row_cb, NULL, NULL, NULL);
     PAGE_SetScrollable(&gui->scrollable, &current_selected);

@@ -98,7 +98,7 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             ts_tgl = type_press_cb; ts_value = type_val_cb;
             break;
         case ITEM_TXPOWER:
-            label = _tr_noop("Tx power");
+            label = _tr_noop("Power");
             ts_value = powerselect_cb;
             break;
         case ITEM_PPMIN:
@@ -120,7 +120,7 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             but_txt = show_text_cb; but_tgl = fixedid_cb; but_data = mp->fixed_id;
             break;
         case ITEM_NUMCHAN:
-            label = _tr_noop("# Channels");
+            label = _tr_noop("Channels");
             ts_value = numchanselect_cb;
             break;
 #if HAS_STANDARD_GUI
