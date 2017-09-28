@@ -74,14 +74,7 @@ PAGEDEF(PAGEID_CHANMON,  PAGE_ChantestInit,    PAGE_ChantestEvent,    PAGE_Chant
 #if HAS_TELEMETRY
 PAGEDEF(PAGEID_TELEMMON, PAGE_TelemtestInit,   PAGE_TelemtestEvent,   NULL,                TX_MENU,    _tr_noop("Telemetry monitor"))
 #endif
-PAGEDEF(PAGEID_RANGE,    PAGE_RangeInit,       NULL,                  PAGE_RangeExit,      TX_MENU,    _tr_noop("Range Test"))
-//-------------------
-
-// Pages menu
-//-----------
-#if HAS_VIDEO
-PAGEDEF(PAGEID_EXTOSD,   PAGE_ExternalOSDInit, NULL,                  NULL,                PAGE_MENU,  _tr_noop("External OSD"))
-#endif
+PAGEDEF(PAGEID_RANGE,    PAGE_RangeInit,       NULL,	              PAGE_RangeExit,      TX_MENU,    _tr_noop("Range test"))
 //-------------------
 
 //These pages should not be lisetd for quickpages
