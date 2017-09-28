@@ -107,9 +107,9 @@ static int row_cb(int absrow, int relrow, int y, void *data)
 #if HAS_EXTENDED_AUDIO
             title = _tr_noop("Audio settings");
 #else
-            title = _tr_noop("Buzz settings");
+            title = _tr_noop("Buzzer settings");
 #endif
-            label = _tr_noop("Buzz volume");
+            label = _tr_noop("Buzzer volume");
             value = _buzz_vol_cb; data = &Transmitter.volume; x = MED_SEL_X_OFFSET;
             break;
 #if HAS_EXTENDED_AUDIO
@@ -123,19 +123,19 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             value = _vibration_state_cb; data = &Transmitter.vibration_state; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_BATT:
-            label = _tr_noop("Batt alarm");
+            label = _tr_noop("Battery alarm");
             value = batalarm_select_cb; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_ALARM_INTV:
-            label = _tr_noop("Alarm intvl");
+            label = _tr_noop("Alarm interval");
             value = batalarmwarn_select_cb; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_PWR_ALARM:
-            label = _tr_noop("PwrOn alarm");
+            label = _tr_noop("Idle alert");
             value = poweralarm_select_cb; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_PWRDN_ALARM:
-            label = _tr_noop("PwrDn alert");
+            label = _tr_noop("Poweroff tone");
             value = _music_shutdown_cb; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_BACKLIGHT:
@@ -161,11 +161,11 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             value = prealert_time_cb; data = (void *)0L; x = SMALL_SEL_X_OFFSET;
             break;
         case ITEM_PREALERT_IVAL:
-            label = _tr_noop("Prealert intvl");
+            label = _tr_noop("Prealert interval");
             value = timer_interval_cb; data = &Transmitter.countdown_timer_settings.prealert_interval; x = SMALL_SEL_X_OFFSET;
             break;
         case ITEM_TIMEUP:
-            label = _tr_noop("Timeup intvl");
+            label = _tr_noop("Timeup interval");
             value = timer_interval_cb; data = &Transmitter.countdown_timer_settings.timeup_interval; x = SMALL_SEL_X_OFFSET;
             break;
         case ITEM_TELEMTEMP:
@@ -178,7 +178,7 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             value = units_cb; data = (void *)0L; x = MED_SEL_X_OFFSET;
             break;
         case ITEM_TELEM_IVAL:
-            label = _tr_noop("Alert intvl");
+            label = _tr_noop("Alert interval");
             value = telem_interval_cb; data = &Transmitter.telem_alert_interval; x = MED_SEL_X_OFFSET;
             break;
     }
