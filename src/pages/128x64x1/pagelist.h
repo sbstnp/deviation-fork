@@ -28,7 +28,7 @@ PAGEDEF(PAGEID_VIDEOCFG, PAGE_VideoSetupInit,  NULL,                  NULL,     
 //---------
 PAGEDEF(PAGEID_MODELMNU, PAGE_ModelMenuInit,   NULL,                  NULL,               MAIN_MENU,   _tr_noop("Model menu"))
 PAGEDEF(PAGEID_TXMENU,   PAGE_TxMenuInit,      NULL,                  NULL,               MAIN_MENU,   _tr_noop("Transmitter menu"))
-PAGEDEF(PAGEID_USB,      PAGE_USBInit,         PAGE_USBEvent,         PAGE_USBExit,       MAIN_MENU,   _tr_noop("USB"))
+PAGEDEF(PAGEID_USB,      PAGE_USBInit,         PAGE_USBEvent,         PAGE_USBExit,       MAIN_MENU,   _tr_noop("USB drive"))
 #if DEBUG_WINDOW_SIZE
 PAGEDEF(PAGEID_DEBUGLOG, PAGE_DebuglogInit,    PAGE_DebuglogEvent,    NULL,               MAIN_MENU,   _tr_noop("Debuglog"))
 #endif
@@ -71,7 +71,7 @@ PAGEDEF(PAGEID_CHANMON,  PAGE_ChantestInit,    PAGE_ChantestEvent,    PAGE_Chant
 #if HAS_TELEMETRY
 PAGEDEF(PAGEID_TELEMMON, PAGE_TelemtestInit,   PAGE_TelemtestEvent,   NULL,                TX_MENU,    _tr_noop("Telemetry monitor"))
 #endif
-PAGEDEF(PAGEID_RANGE,    PAGE_RangeInit,       NULL,	              PAGE_RangeExit,      TX_MENU,    _tr_noop("Range Test"))
+PAGEDEF(PAGEID_RANGE,    PAGE_RangeInit,       NULL,	              PAGE_RangeExit,      TX_MENU,    _tr_noop("Range test"))
 //-------------------
 
 //These pages should not be lisetd for quickpages
