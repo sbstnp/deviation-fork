@@ -27,12 +27,13 @@ enum {
    LABEL_W    = 60,
    TEXTSEL_X  = 0,
    TEXTSEL_W  = 60,
-   GRAPH_X    = 77,
-   GRAPH_Y    = LCD_HEIGHT - 48,
-   GRAPH_W    = 48,
-   GRAPH_H    = 48,
+   GRAPH_X    = 70,
+   //GRAPH_Y    = LCD_HEIGHT - 48,
+   #define GRAPH_Y HEADER_HEIGHT
+   GRAPH_W    = 54,
+   GRAPH_H    = 54,
    LEFT_VIEW_WIDTH   = 60,
-   RIGHT_VIEW_HEIGHT = 48,
+   RIGHT_VIEW_HEIGHT = 54,
    LINES_PER_ROW     = 2,
    UNDERLINE         = 1,
 };
@@ -48,7 +49,7 @@ static void _show_titlerow()
     mp->entries_per_page = 2;
     memset(gui, 0, sizeof(*gui));
 
-    GUI_CreateLabelBox(&gui->chan, LABEL_X, 0 , TYPE_X - LABEL_X, HEADER_HEIGHT, &TITLE_FONT,
+    GUI_CreateLabelBox(&gui->chan, LABEL_X, 0 , TYPE_X - LABEL_X, HEADER_WIDGET_HEIGHT, &TITLE_FONT,
             MIXPAGE_ChanNameProtoCB, NULL, (void *)((long)mp->cur_mixer->dest));
     GUI_CreateTextSelectPlate(&gui->tmpl, TYPE_X, 0,  TYPE_W, HEADER_WIDGET_HEIGHT, &TEXTSEL_FONT, NULL, templatetype_cb, (void *)((long)mp->channel));
     GUI_CreateButtonPlateText(&gui->save, SAVE_X, 0, SAVE_W, HEADER_WIDGET_HEIGHT, &BUTTON_FONT, NULL, okcancel_cb, (void *)_tr("Save"));
@@ -75,7 +76,7 @@ static int simple_row_cb(int absrow, int relrow, int y, void *data)
     data = NULL;
     switch(absrow) {
         case COMMON_SRC:
-            label = _tr_noop("Src");
+            label = _tr_noop("Source");
             tgl = sourceselect_cb; value = set_source_cb; data = &mp->mixer[0].src; input_value = set_input_source_cb;
             break;
         case COMMON_CURVE:
@@ -154,7 +155,7 @@ static int complex_row_cb(int absrow, int relrow, int y, void *data)
             value = set_mux_cb;
             break;
         case COMPLEX_SRC:
-            label = _tr_noop("Src");
+            label = _tr_noop("Source");
             tgl = sourceselect_cb; value = set_source_cb; data = &mp->cur_mixer->src; input_value = set_input_source_cb;
             break;
         case COMPLEX_CURVE:
@@ -262,11 +263,11 @@ static int expo_row_cb(int absrow, int relrow, int y, void *data)
 
     switch(absrow) {
         case COMMON_SRC:
-            label = _tr("Src");
+            label = _tr("Source");
             tgl = sourceselect_cb; value = set_source_cb; data = &mp->mixer[0].src; input_value = set_input_source_cb;
             break;
         case COMMON_CURVE:
-            label = _tr("High-Rate");
+            label = _tr("Pos 0");
             tgl = curveselect_cb; value = set_curvename_cb; data = &mp->mixer[0];
             break;
         case COMMON_SCALE:
@@ -338,9 +339,9 @@ static void _show_expo_dr()
     int left_side_num_elements = (LCD_HEIGHT - HEADER_HEIGHT) / LINE_SPACE;
     //left_side_num_elements = ((LINES_PER_ROW - 1) + left_side_num_elements) / LINES_PER_ROW;
     left_side_num_elements = left_side_num_elements - left_side_num_elements%2;
-    mp->firstObj = GUI_CreateScrollable(&gui->scrollable, 0, HEADER_HEIGHT, LEFT_VIEW_WIDTH + ARROW_WIDTH, 
+    mp->firstObj = GUI_CreateScrollable(&gui->scrollable, 0, HEADER_HEIGHT, LEFT_VIEW_WIDTH + ARROW_WIDTH,
                         left_side_num_elements * LINE_SPACE, LINE_SPACE, EXPO_LAST, expo_row_cb, expo_getobj_cb, expo_size_cb, NULL);
-    
+
     GUI_CreateXYGraph(&gui->graph, GRAPH_X, GRAPH_Y, GRAPH_W, GRAPH_H,
                               CHAN_MIN_VALUE, CHAN_MIN_VALUE * 1251 / 1000,
                               CHAN_MAX_VALUE, CHAN_MAX_VALUE * 1251 / 1000,

@@ -48,8 +48,9 @@ static void _draw_page(int has_pa) {
     } else {
         PAGE_SetActionCB(action_cb);
         if (mp->testing) {
-            snprintf(tempstring, sizeof(tempstring), "%s %s\n%s %s\n%s",
-                     _tr("Power reduced to"), RADIO_TX_POWER_VAL[Model.tx_power],
+            snprintf(tempstring, sizeof(tempstring), "%s\n %s %s\n %s %s\n\n%s",
+                     _tr("Power reduced"),
+                     _tr("to"), RADIO_TX_POWER_VAL[Model.tx_power],
                      _tr("from"), RADIO_TX_POWER_VAL[mp->old_power],
                      _tr("Press ENT to stop test."));
         } else {

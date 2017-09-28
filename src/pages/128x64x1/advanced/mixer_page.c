@@ -41,11 +41,11 @@ static void _show_title()
 
 static void _show_page()
 {
-    PAGE_ShowHeader(_tr("Mixer    Reorder:Hold R+"));
+    PAGE_ShowHeader(_tr("Mixer | Hold R+ to reorder"));
     memset(gui, 0, sizeof(*gui));
-    
+
     u8 channel_count = Model.num_channels + NUM_VIRT_CHANNELS;
-    
+
     GUI_CreateScrollable(&gui->scrollable, 0, HEADER_HEIGHT, LCD_WIDTH, LCD_HEIGHT - HEADER_HEIGHT,
                      LINE_SPACE, channel_count, row_cb, NULL, NULL, NULL);// 7 lines
     PAGE_SetScrollable(&gui->scrollable, &current_selected);
@@ -74,7 +74,7 @@ static int row_cb(int absrow, int relrow, int y, void *data)
     }
     GUI_CreateButtonPlateText(&gui->tmpl[relrow], COL2_X, y, COL2_W, LINE_HEIGHT, &BUTTON_FONT, template_name_cb,
         templateselect_cb, (void *)((long)channel));
-   
+
     for (idx = 0; idx < NUM_MIXERS; idx++)
         if (mix[idx].src && mix[idx].dest == channel)
             break;
