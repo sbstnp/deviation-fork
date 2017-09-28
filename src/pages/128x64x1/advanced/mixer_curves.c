@@ -24,7 +24,7 @@ enum {
     SAVE_W = 60,
     UNDERLINE = 1,
     LABEL_X = 0,
-    LABEL_W = 74,
+    LABEL_W = 60,
     LABEL1_W = 39,
     LABEL2_W = 50,
     TEXTSEL1_X = 39,
@@ -33,10 +33,10 @@ enum {
     TEXTSEL2_W = 24,
     VALUE_X = 0,
     #define VALUE_Y_OFFSET LINE_SPACE
-    GRAPH_X = 77,
-    #define GRAPH_Y LINE_HEIGHT
-    GRAPH_W = 50,
-    GRAPH_H = 50,
+    GRAPH_X = 70,
+    #define GRAPH_Y HEADER_HEIGHT
+    GRAPH_W = 54,
+    GRAPH_H = 54,
 };
 #endif //OVERRIDE_PLACEMENT
 #include "../../common/advanced/_mixer_curves.c"
@@ -58,8 +58,8 @@ void PAGE_EditCurvesInit(int page)
     }
     edit->curve = *curve;
 
-    GUI_CreateTextSelectPlate(&gui->name, NAME_X, 0, NAME_W, HEADER_HEIGHT, &TEXTSEL_FONT, NULL, set_curvename_cb, NULL);
-    GUI_CreateButtonPlateText(&gui->save, SAVE_X, 0, SAVE_W, HEADER_WIDGET_HEIGHT, &BUTTON_FONT , NULL, okcancel_cb, (void *)_tr("Save"));
+    GUI_CreateTextSelectPlate(&gui->name, NAME_X, 0, NAME_W, HEADER_WIDGET_HEIGHT, &TEXTSEL_FONT, NULL, set_curvename_cb, NULL);
+    GUI_CreateButtonPlateText(&gui->save, SAVE_X, 0, SAVE_W, HEADER_WIDGET_HEIGHT, &BUTTON_FONT, NULL, okcancel_cb, (void *)_tr("Save"));
     // Draw a line
     if (UNDERLINE)
         GUI_CreateRect(&gui->rect, 0, HEADER_WIDGET_HEIGHT, LCD_WIDTH, 1, &DEFAULT_FONT);
@@ -68,11 +68,13 @@ void PAGE_EditCurvesInit(int page)
     u8 y = space;
 
     if (type >= CURVE_3POINT) {
-        GUI_CreateLabelBox(&gui->smoothlbl, LABEL_X, y, LABEL1_W, LINE_HEIGHT, &LABEL_FONT, NULL, NULL, _tr("Smooth"));
-        GUI_CreateTextSelectPlate(&gui->smooth, TEXTSEL1_X, y, TEXTSEL1_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_smooth_cb, NULL);
+        GUI_CreateLabelBox(&gui->smoothlbl, LABEL_X, y, LABEL_W, LINE_HEIGHT, &LABEL_FONT, NULL, NULL, _tr("Smooth"));
+        y += VALUE_Y_OFFSET;
+        GUI_CreateTextSelectPlate(&gui->smooth, LABEL_X, y, LABEL_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_smooth_cb, NULL);
         y += space;
-        GUI_CreateLabelBox(&gui->pointlbl, LABEL_X, y , LABEL2_W, LINE_HEIGHT, &LABEL_FONT, NULL, NULL, _tr("Point"));
-        GUI_CreateTextSelectPlate(&gui->point, TEXTSEL2_X, y, TEXTSEL2_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_pointnum_cb, NULL);
+        GUI_CreateLabelBox(&gui->pointlbl, LABEL_X, y , LABEL_W, LINE_HEIGHT, &LABEL_FONT, NULL, NULL, _tr("Point"));
+        y += VALUE_Y_OFFSET;
+        GUI_CreateTextSelectPlate(&gui->point, LABEL_X, y, LABEL_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_pointnum_cb, NULL);
     } else if(type == CURVE_DEADBAND || type == CURVE_EXPO) {
         GUI_CreateLabelBox(&gui->pointlbl, LABEL_X, y , LABEL_W, LINE_HEIGHT, &LABEL_FONT, NULL, NULL, _tr("Pos/Neg"));
         y += space;
@@ -85,8 +87,8 @@ void PAGE_EditCurvesInit(int page)
     GUI_CreateTextSelectPlate(&gui->value, VALUE_X, y, LABEL_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_value_cb, NULL);
 
     GUI_CreateXYGraph(&gui->graph, GRAPH_X, GRAPH_Y, GRAPH_W, GRAPH_H,
-                              CHAN_MIN_VALUE, CHAN_MIN_VALUE,
-                              CHAN_MAX_VALUE, CHAN_MAX_VALUE,
+                              CHAN_MIN_VALUE, CHAN_MIN_VALUE * 1251 / 1000,
+                              CHAN_MAX_VALUE, CHAN_MAX_VALUE * 1251 / 1000,
                               0, 0, //CHAN_MAX_VALUE / 4, CHAN_MAX_VALUE / 4,
                               show_curve_cb, NULL, touch_cb, &edit->curve);
     GUI_SetSelected((guiObject_t *)&gui->point);

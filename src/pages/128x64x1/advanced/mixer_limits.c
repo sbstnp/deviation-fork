@@ -37,7 +37,7 @@ static void _show_titlerow()
     mp->entries_per_page = 4;
     memset(gui, 0, sizeof(*gui));
 
-    GUI_CreateLabelBox(&gui->title, TITLE_X, 0 , TITLE_W, HEADER_HEIGHT, &TITLE_FONT,
+    GUI_CreateLabelBox(&gui->title, TITLE_X, 0 , TITLE_W, HEADER_WIDGET_HEIGHT, &TITLE_FONT,
             MIXPAGE_ChanNameProtoCB, NULL, (void *)(long)mp->channel);
     GUI_CreateButtonPlateText(&gui->revert, REVERT_X, 0, REVERT_W, HEADER_WIDGET_HEIGHT, &BUTTON_FONT, NULL, revert_cb, (void *)_tr("Revert"));
 }
@@ -64,7 +64,7 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             tgl = toggle_reverse_cb; disp = reverse_cb; value = (void *)((long)mp->channel);
             break;
         case ITEM_FAILSAFE:
-            label = _tr("Fail-safe");
+            label = _tr("Failsafe");
             tgl = toggle_failsafe_cb; disp = set_failsafe_cb;
             break;
         case ITEM_SAFETY:
@@ -72,15 +72,15 @@ static int row_cb(int absrow, int relrow, int y, void *data)
             tgl = sourceselect_cb; disp = set_source_cb; value = &mp->limit->safetysw; input_disp = set_input_source_cb;
             break;
         case ITEM_SAFEVAL:
-            label = _tr("Safe Val");
+            label = _tr("Safe value");
             disp = set_safeval_cb;
             break;
         case ITEM_MINLIMIT:
-            label = _tr("Min Limit");
+            label = _tr("Min limit");
             disp = set_limits_cb; value = &mp->limit->min;
             break;
         case ITEM_MAXLIMIT:
-            label = _tr("Max Limit");        
+            label = _tr("Max limit");
             disp = set_limits_cb; value = &mp->limit->max;
             break;
         case ITEM_SCALEPOS:

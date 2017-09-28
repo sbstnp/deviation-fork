@@ -24,7 +24,7 @@
 enum {
     NUM_X             = 0,
     NUM_WIDTH         = 16,
-    MENU_X            = 17,
+    MENU_X            = 4,
     MENU_WIDTH        = (LCD_WIDTH - MENU_X * 2),
 };
 #endif //OVERRIDE_PLACEMENT
@@ -50,8 +50,6 @@ static int row_cb(int absrow, int relrow, int y, void *data)
         if (i >= PAGEID_LAST)
             break;
         if (idx == absrow) {
-            GUI_CreateLabelBox(&gui->idx[relrow], NUM_X, y,
-                NUM_WIDTH, LINE_HEIGHT, &LABEL_FONT, idx_string_cb, NULL, (void *)(absrow+ 1L));
             GUI_CreateLabelBox(&gui->name[relrow], MENU_X, y,
                 MENU_WIDTH, LINE_HEIGHT, &MENU_FONT, menu_name_cb, menu_press_cb, (const void *)(long)i);
             break;
