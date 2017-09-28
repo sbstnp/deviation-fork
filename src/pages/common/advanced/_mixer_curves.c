@@ -30,7 +30,7 @@ s32 show_curve_cb(s32 xval, void *data)
     s16 oldpoint;
     s32 yval;
     if (edit->reverse)
-        xval = -xval; 
+        xval = -xval;
     if (edit->pointnum < 0) {
         oldpoint = edit->curve.points[1];
         edit->curve.points[1] = edit->curve.points[0];
@@ -41,7 +41,7 @@ s32 show_curve_cb(s32 xval, void *data)
     }
     return yval;
 }
-    
+
 static const char *set_curvename_cb(guiObject_t *obj, int dir, void *data)
 {
     (void)data;
@@ -91,7 +91,7 @@ static const char *set_value_cb(guiObject_t *obj, int dir, void *data)
     }
     return ret;
 }
-   
+
 static const char *set_pointnum_cb(guiObject_t *obj, int dir, void *data)
 {
     (void)data;
@@ -135,8 +135,8 @@ const char *set_expopoint_cb(guiObject_t *obj, int dir, void *data)
     }
     switch(edit->pointnum) {
         case -1: return _tr("Symmetric");
-        case 0: return _tr("Pos");
-        case 1: return _tr("Neg");
+        case 0: return _tr("Positive");
+        case 1: return _tr("Negative");
         default: return "-";
     }
 }
@@ -174,7 +174,7 @@ static u8 touch_cb(s16 x, s16 y, void *data)
             int point = (x + delta / 2) / delta;
             if (point != pointnum) {
                 edit->pointnum = point;
-printf("Setting point from %d -> %d\n", edit->pointnum, point);
+                // printf("Setting point from %d -> %d\n", edit->pointnum, point);
                 GUI_Redraw(&gui->point);
             }
             pointnum = point;
