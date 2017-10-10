@@ -108,7 +108,7 @@ if($objdir) {
                             $str = "";
                         }
                     } else {
-                        $str .= chr(hex($1));
+                        $str .= chr(hex(chomp($1)));
                     }
                 }
             }
@@ -178,7 +178,7 @@ foreach my $file (@files) {
             $targetstr{$t}{$eng} = $next;
             $strings{$eng} ||= $next;
         }
-        
+
     }
     if($fs) {
         #if target is specified, we want to return a filtered list of strings
