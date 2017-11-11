@@ -87,8 +87,8 @@ void PAGE_EditCurvesInit(int page)
     GUI_CreateTextSelectPlate(&gui->value, VALUE_X, y, LABEL_W, LINE_HEIGHT, &TEXTSEL_FONT, NULL, set_value_cb, NULL);
 
     GUI_CreateXYGraph(&gui->graph, GRAPH_X, GRAPH_Y, GRAPH_W, GRAPH_H,
-                              CHAN_MIN_VALUE, CHAN_MIN_VALUE * 1251 / 1000,
-                              CHAN_MAX_VALUE, CHAN_MAX_VALUE * 1251 / 1000,
+                              CHAN_MIN_VALUE, CHAN_MIN_VALUE,
+                              CHAN_MAX_VALUE, CHAN_MAX_VALUE,
                               0, 0, //CHAN_MAX_VALUE / 4, CHAN_MAX_VALUE / 4,
                               show_curve_cb, NULL, touch_cb, &edit->curve);
     GUI_SetSelected((guiObject_t *)&gui->point);
