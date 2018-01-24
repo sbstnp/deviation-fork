@@ -116,7 +116,7 @@ static void frsky2way_init(int bind)
 
         CC2500_SetTxRxMode(TX_EN);
         CC2500_SetPower(Model.tx_power);
-        
+
         CC2500_Strobe(CC2500_SIDLE);    // Go to idle...
 
         CC2500_WriteReg(CC2500_09_ADDR, bind ? 0x03 : (fixed_id & 0xff));
@@ -321,7 +321,7 @@ static void frsky2way_parse_telem(u8 *pkt, int len)
             ts_state = TS_IDLE;
             sequence = pkt[7];    // should be able to recover in middle of sequence
         }
-            
+
         for(int i=8; i < 8+pkt[6]; i++)
             frsky_parse_telem_stream(pkt[i]);
     }
@@ -491,7 +491,7 @@ const void *FRSKY2WAY_Cmds(enum ProtoCmds cmd)
         case PROTOCMD_DEINIT:
             CLOCK_StopTimer();
             return (void *)(CC2500_Reset() ? 1L : -1L);
-        case PROTOCMD_TELEMETRYTYPE: 
+        case PROTOCMD_TELEMETRYTYPE:
             return (void *)(long) TELEM_FRSKY;
         default: break;
     }
