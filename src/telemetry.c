@@ -21,6 +21,7 @@
 static void _get_value_str(char *str, s32 value, u8 decimals, char units);
 static void _get_temp_str(char *str, s32 value, u8 decimals, char units);
 static void _get_altitude_str(char *str, s32 value, u8 decimals, char units);
+static void _get_capacity_str(char *str, s32 value);
 #include "telemetry/telem_devo.c"
 #include "telemetry/telem_dsm.c"
 #include "telemetry/telem_frsky.c"
@@ -62,6 +63,13 @@ void _get_value_str(char *str, s32 value, u8 decimals, char units)
     }
     str[len++] = units;
     str[len] = '\0';
+}
+
+void _get_capacity_str(char *str, s32 value)
+{
+    char tmpstr[6]; // 5 digits + NULL
+    _get_value_str(tmpstr, value, 0, '\0');
+    sprintf(str, "%smAh", tmpstr);
 }
 
 void _get_temp_str(char *str, s32 value, u8 decimals, char units)
