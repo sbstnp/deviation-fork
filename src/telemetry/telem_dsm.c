@@ -131,7 +131,7 @@ const char * _dsm_str_by_value(char *str, u8 telem, s32 value)
         case TELEM_DSM_FLOG_VOLT2:      _get_value_str(str, value, 2, 'V'); break;
         case TELEM_DSM_FLOG_TEMP1:      _get_temp_str(str, value, 0, 'C'); break;
         case TELEM_DSM_AMPS1:           _get_value_str(str, value * 196791 / 100000, 1, 'A'); break;
-        case TELEM_DSM_ALTITUDE:        
+        case TELEM_DSM_ALTITUDE:
         case TELEM_DSM_ALTITUDE_MAX:    _get_altitude_str(str, value, 1, 'm'); break;
         case TELEM_DSM_GFORCE_X:
         case TELEM_DSM_GFORCE_Y:
@@ -145,9 +145,10 @@ const char * _dsm_str_by_value(char *str, u8 telem, s32 value)
         case TELEM_DSM_PBOX_ALARMV2:
         case TELEM_DSM_PBOX_ALARMC1:
         case TELEM_DSM_PBOX_ALARMC2:    strcpy(str, _tr(value?"On":"Off")); break;
+        case TELEM_DSM_RXPCAP_CAPACITY:
         case TELEM_DSM_PBOX_CAPACITY1:
         case TELEM_DSM_PBOX_CAPACITY2:
-        case TELEM_DSM_FPCAP_CAPACITY:
+        case TELEM_DSM_FPCAP_CAPACITY:  _get_capacity_str(str, value); break;
         case TELEM_DSM_JETCAT_RPM:
         case TELEM_DSM_ESC_RPM:         _get_value_str(str, value, 0, '\0'); break;
         case TELEM_DSM_PBOX_VOLT1:
@@ -170,7 +171,6 @@ const char * _dsm_str_by_value(char *str, u8 telem, s32 value)
         case TELEM_DSM_FPCAP_TEMP:      _get_temp_str(str, value, 1, 'C'); break;
         case TELEM_DSM_ESC_THROTTLE:
         case TELEM_DSM_ESC_OUTPUT:      _get_value_str(str, value, 1, '%'); break;
-        case TELEM_DSM_RXPCAP_CAPACITY: _get_value_str(str, value, 1, '\0'); break;
 #endif
         case TELEM_DSM_VARIO_ALTITUDE:
         case TELEM_DSM_VARIO_CLIMBRATE1:
@@ -265,7 +265,7 @@ static const char * _dsm_short_name(char *str, u8 telem)
 }
 
 s32 _dsm_get_max_value(u8 telem)
-{           
+{
     switch(telem) {
         case TELEM_DSM_FLOG_FADESA:
         case TELEM_DSM_FLOG_FADESB:
@@ -330,7 +330,7 @@ s32 _dsm_get_max_value(u8 telem)
 }
 
 s32 _dsm_get_min_value(u8 telem)
-{           
+{
     switch(telem) {
         case TELEM_DSM_FLOG_TEMP1:      return -40;
         case TELEM_DSM_FLOG_RPM1:       return 200;
