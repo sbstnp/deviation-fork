@@ -32,10 +32,10 @@ void GUI_DrawLabelHelper(u16 obj_x, u16 obj_y, u16 obj_w, u16 obj_h, const char 
     if (desc->style == LABEL_BOX || desc->style == LABEL_BRACKET || desc->style == LABEL_SQUAREBOX) {
         // draw round rect for the textsel widget when it is pressable
         if (is_selected) {
-            if (desc->style == LABEL_SQUAREBOX ||obj_w < 5)
-                LCD_FillRect(obj_x, obj_y, obj_w, obj_h , 1);
-            else
-                LCD_FillRoundRect(obj_x, obj_y, obj_w, obj_h , 3, 1);
+            // if (desc->style == LABEL_SQUAREBOX ||obj_w < 5)
+                LCD_FillRect(obj_x + 1, obj_y, obj_w - 2, obj_h , 1);
+            // else
+                // LCD_FillRoundRect(obj_x, obj_y, obj_w, obj_h , 3, 1);
         }  else {
             if (desc->style == LABEL_SQUAREBOX)
                 if (desc->fill_color == 0)
@@ -64,11 +64,12 @@ void GUI_DrawLabelHelper(u16 obj_x, u16 obj_y, u16 obj_w, u16 obj_h, const char 
                     }
                 }
             } else
-                LCD_DrawRoundRect(obj_x, obj_y, obj_w, obj_h , 3,  1);
+                // LCD_DrawRoundRect(obj_x, obj_y, obj_w, obj_h , 3,  1);
+                LCD_DrawLine(obj_x + 1, obj_y + obj_h - 1, obj_x + obj_w - 2, obj_y + obj_h - 1, 1);
         }
     }
     else if (desc->style == LABEL_INVERTED || is_selected) {
-        LCD_FillRect(obj_x, obj_y, obj_w, obj_h, 0xffff);
+        LCD_FillRect(obj_x + 1 , obj_y, obj_w - 2, obj_h, 0xffff);
     }
     else if (desc->style == LABEL_FILL) {
         LCD_FillRect(obj_x, obj_y, obj_w, obj_h, desc->fill_color);

@@ -30,7 +30,7 @@ void _DrawButton(struct guiObject *obj)
     const char *txt;
     u16 x_off, y_off;
 
-#define BUTTON_ROUND 3
+#define BUTTON_ROUND 0
     LCD_SetFont(button->desc.font); //Set Font here so callback can calculate size
     if (button->strCallback)
         txt = button->strCallback(obj, button->cb_data);
@@ -45,12 +45,14 @@ void _DrawButton(struct guiObject *obj)
     if (box->height == 0)
         h = text_h;
     if (obj == objSELECTED) {
-        LCD_FillRoundRect(obj->box.x, obj->box.y, w, h , BUTTON_ROUND, 1);
+        //LCD_FillRoundRect(obj->box.x, obj->box.y, w, h , BUTTON_ROUND, 1);
+        LCD_FillRect(obj->box.x + 4, obj->box.y, w - 8, h, 1);
         LCD_SetFontColor(0);
     }  else {
         LCD_FillRoundRect(obj->box.x, obj->box.y, w, h , BUTTON_ROUND, 0); // clear the background
         if (GUI_IsButtonEnabled(obj))
-            LCD_DrawRoundRect(obj->box.x, obj->box.y, w, h , BUTTON_ROUND,  1);
+            // LCD_DrawRoundRect(obj->box.x, obj->box.y, w, h , BUTTON_ROUND,  1);
+            LCD_DrawLine(obj->box.x + 4, obj->box.y + h - 1, obj->box.x + w - 5, obj->box.y + h - 1, 1);
         /* Bracket style button, disable temporarily
         u16 y1 = obj->box.y + 2;
         u16 y2 = obj->box.y + obj->box.height -3;

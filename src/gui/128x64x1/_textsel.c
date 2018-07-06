@@ -31,7 +31,7 @@ void _DrawTextSelectHelper(struct guiTextSelect *select, const char *str)
         u16 x2 = box->x + box->width -1;
         LCD_DrawLine(x1, y - 2, x2, y, 0xffff);
         LCD_DrawLine(x1, y + 2, x2, y, 0xffff); //">"
-    }  else if (select->enable == 2) {  // ENBALBE == 2 means the textsel can be pressed but not be selected
+    }  else if (select->enable == 2) {  // ENABLE == 2 means the textsel can be pressed but not be selected
         select->desc.style = LABEL_BOX;
     } else {
         if (!select->enable) { // avoid drawing button box when it is disable

@@ -42,6 +42,10 @@ enum {
 //
     MODEL_NAME_X  = 0,
     MODEL_NAME_Y  = 0,
+    MODEL_NAME_WIDTH = 48,
+    PROTO_X = (MODEL_NAME_WIDTH + 2),
+    PROTO_Y = 0,
+    PROTO_WIDTH = 16
 };
 
 #endif //OVERRIDE_PLACEMENT
@@ -72,7 +76,10 @@ void PAGE_MainInit(int page)
     next_scan = CLOCK_getms()+BATTERY_SCAN_MSEC;
 
     GUI_CreateLabelBox(&gui->name, MODEL_NAME_X, MODEL_NAME_Y, //64, 12,
-            LCD_WIDTH, LINE_HEIGHT, &MODELNAME_FONT, NULL, NULL, Model.name);
+            MODEL_NAME_WIDTH, LINE_HEIGHT, &MODELNAME_FONT, NULL, NULL, Model.name);
+
+    GUI_CreateLabelBox(&gui->proto, PROTO_X, PROTO_Y, //64, 12,
+            PROTO_WIDTH, LINE_HEIGHT, &TINY_FONT, NULL, NULL, ProtocolNames[Model.protocol]);
 
     show_elements();
     //Battery
@@ -103,10 +110,10 @@ static unsigned _action_cb(u32 button, unsigned flags, void *data)
 {
     u8 i;
     if ((flags & BUTTON_PRESS) && CHAN_ButtonIsPressed(button, BUT_ENTER)) {
-        //see pagelist.h for mapping of 'page' to menu_id 
+        //see pagelist.h for mapping of 'page' to menu_id
         PAGE_PushByID(PAGEID_MENU, 0);
     } else if ((flags & BUTTON_PRESS) && CHAN_ButtonIsPressed(button, BUT_RIGHT)) {
-	for ( i=0; i< NUM_TIMERS; i++) 
+	for ( i=0; i< NUM_TIMERS; i++)
             TIMER_StartStop(i);
     } else if ((flags & BUTTON_PRESS) && CHAN_ButtonIsPressed(button, BUT_LEFT)) {
         for ( i=0; i< NUM_TIMERS; i++)

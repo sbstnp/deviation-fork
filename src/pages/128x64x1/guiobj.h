@@ -67,6 +67,7 @@ struct toggleselect_obj {
 
 struct mainpage_obj {
     guiLabel_t name;
+    guiLabel_t proto;
     union {
         guiBarGraph_t bar;
         guiLabel_t    box;
