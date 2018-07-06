@@ -224,9 +224,9 @@ struct debuglog_obj {
 struct voiceconfig_obj {
     guiLabel_t msg;
     guiScrollable_t scrollable;
-    guiLabel_t name[2];
-    guiTextSelect_t voiceidx[2];
-    guiLabel_t voicelbl[2];
+    guiLabel_t name[4];
+    guiTextSelect_t voiceidx[4];
+    guiLabel_t voicelbl[4];
 
 };
 #endif

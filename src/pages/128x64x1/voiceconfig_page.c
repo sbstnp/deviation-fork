@@ -42,13 +42,13 @@ static int row_cb(int absrow, int relrow, int y, void *data)
 
     //Row 1
     GUI_CreateLabelBox(&gui->name[relrow], LABEL_X, y,
-            LABEL_WIDTH, LINE_HEIGHT, &LABEL_FONT, voiceconfig_str_cb, NULL, (void *)(long)absrow);
+            LABEL_WIDTH, LINE_SPACE, &LABEL_FONT, voiceconfig_str_cb, NULL, (void *)(long)absrow);
     GUI_CreateTextSelectPlate(&gui->voiceidx[relrow], TEXTSEL_X, y,
-            TEXTSEL_WIDTH, LINE_HEIGHT, &TEXTSEL_FONT, voice_test_cb, voiceid_cb, (void *)(long)absrow);
+            TEXTSEL_WIDTH, LINE_SPACE, &TEXTSEL_FONT, voice_test_cb, voiceid_cb, (void *)(long)absrow);
     //Row 2
     y += LINE_SPACE;
     GUI_CreateLabelBox(&gui->voicelbl[relrow], LABEL_X, y,
-            LABELID_WIDTH, LINE_HEIGHT, &TINY_FONT, voicelbl_cb, NULL, (void *)(long)absrow);
+            LABELID_WIDTH, LINE_SPACE, &TINY_FONT, voicelbl_cb, NULL, (void *)(long)absrow);
     return 1;
 }
 
