@@ -412,11 +412,12 @@ void show_elements()
                 break;
             }
             case ELEM_BATTERY:
-                GUI_CreateLabelBox(&gui->elem[i].box, x, y, w, h, &BATTERY_FONT, voltage_cb, NULL, NULL);
-                break; 
+                // y-1 to perfectly aling at the top of the screen
+                GUI_CreateLabelBox(&gui->elem[i].box, x, y-1, w, h, &BATTERY_FONT, voltage_cb, NULL, NULL);
+                break;
             case ELEM_TXPOWER:
-                GUI_CreateLabelBox(&gui->elem[i].box, x, y, w, h, &TINY_FONT, _power_to_string, NULL, NULL);
-                break; 
+                GUI_CreateLabelBox(&gui->elem[i].box, x, y-1, w, h, &TINY_FONT, _power_to_string, NULL, NULL);
+                break;
         }
     }
 }
