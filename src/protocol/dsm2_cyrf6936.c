@@ -47,10 +47,11 @@
 
 static const char * const dsm_opts[] = {
     _tr_noop("Telemetry"),  _tr_noop("Off"), _tr_noop("On"), NULL, 
-    _tr_noop("OrangeRx"),  _tr_noop("No"), _tr_noop("Yes"), NULL, 
+    _tr_noop("OrangeRx"),  _tr_noop("No"), _tr_noop("Yes"), NULL,
 #ifndef MODULAR
-    _tr_noop("HighSpeed"),  _tr_noop("Off"), _tr_noop("On"), NULL, 
-    _tr_noop("F.Log filter"),  _tr_noop("Off"), _tr_noop("On"), NULL, 
+    _tr_noop("HighSpeed"),  _tr_noop("Off"), _tr_noop("On"), NULL,
+    _tr_noop("F.Log filter"),  _tr_noop("Off"), _tr_noop("On"), NULL,
+    _tr_noop("FPV Racer"),  _tr_noop("Off"), _tr_noop("On"), NULL,
 #endif
     NULL
 };
@@ -61,6 +62,7 @@ enum {
 #ifndef MODULAR
     PROTOOPTS_HIGHSPEED,
     PROTOOPTS_FLOGFILTER,
+    PROTOOPTS_FPV_RACER,
 #endif
     LAST_PROTO_OPT,
 };
@@ -76,6 +78,8 @@ ctassert(LAST_PROTO_OPT <= NUM_PROTO_OPTS, too_many_protocol_opts);
     #define HIGHSPEED_OFF 0
     #define FLOGFILTER_ON 1
     #define FLOGFILTER_OFF 0
+    #define FPV_RACER_ON 1
+    #define FPV_RACER_OFF 0
 #endif
 
 //During binding we will send BIND_COUNT/2 packets
@@ -172,7 +176,8 @@ static const u8 ch_map7[] =  {1, 5, 2, 3, 0,  4,    6}; //DX6i
 static const u8 ch_map12[] = {1, 5, 2, 4, 6, 10, 0xff,    0, 7, 3, 8, 9, 11, 0xff}; //12ch - DX18
 #ifndef MODULAR
 // "High Speed" 11ms for 8...10 channels
-static const u8 ch_map14[] = {1, 5, 2, 3, 4,  6,    8,    1, 5, 2, 3, 0,  7,    9};
+static const u8 ch_map14[]       = {1, 5, 2, 3, 4,  6,    8,    1, 5, 2, 3, 0,  7,    9};
+static const u8 ch_map14_racer[] = {1, 0, 2, 3, 4,  6,    8,    1, 0, 2, 3, 5,  7,    9};
 #endif
 
 u8 packet[16];
@@ -246,7 +251,10 @@ static void build_data_packet(u8 upper)
         chmap = ch_map7;
 #ifndef MODULAR
     } else if((num_channels < 11) && (Model.proto_opts[PROTOOPTS_HIGHSPEED] == HIGHSPEED_ON)) {
-        chmap = ch_map14;
+        if(Model.proto_opts[PROTOOPTS_FPV_RACER] == FPV_RACER_ON)
+            chmap = ch_map14_racer;
+        else
+            chmap = ch_map14;
 #endif
     } else {
         chmap = ch_map12;
