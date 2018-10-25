@@ -45,6 +45,10 @@ PROTO_MODULES += $(ODIR)/protocol/q303.mod
 PROTO_MODULES += $(ODIR)/protocol/gw008.mod
 PROTO_MODULES += $(ODIR)/protocol/dm002.mod
 PROTO_MODULES += $(ODIR)/protocol/corona.mod
+PROTO_MODULES += $(ODIR)/protocol/bugs3.mod
+PROTO_MODULES += $(ODIR)/protocol/crsf.mod
+PROTO_MODULES += $(ODIR)/protocol/hitec.mod
+PROTO_MODULES += $(ODIR)/protocol/wfly.mod
 
 ALL += $(PROTO_MODULES)
 else #BUILD_TARGET
@@ -226,6 +230,22 @@ $(ODIR)/protocol/dm002.mod : $(ODIR)/dm002_nrf24l01.bin
     
 $(ODIR)/protocol/corona.mod : $(ODIR)/corona_cc2500.bin
 	@echo Building 'corona' module
+	/bin/mkdir -p $(ODIR)/protocol/ 2>/dev/null; /bin/cp $< $@
+
+$(ODIR)/protocol/bugs3.mod : $(ODIR)/bugs3_a7105.bin
+	@echo Building 'bugs3' module
+	/bin/mkdir -p $(ODIR)/protocol/ 2>/dev/null; /bin/cp $< $@
+    
+$(ODIR)/protocol/crsf.mod : $(ODIR)/crsf_uart.bin
+	@echo Building 'crsf' module
+	/bin/mkdir -p $(ODIR)/protocol/ 2>/dev/null; /bin/cp $< $@
+    
+$(ODIR)/protocol/hitec.mod : $(ODIR)/hitec_cc2500.bin
+	@echo Building 'hitec' module
+	/bin/mkdir -p $(ODIR)/protocol/ 2>/dev/null; /bin/cp $< $@
+
+$(ODIR)/protocol/wfly.mod : $(ODIR)/wfly_cyrf6936.bin
+	@echo Building 'wfly' module
 	/bin/mkdir -p $(ODIR)/protocol/ 2>/dev/null; /bin/cp $< $@
     
 endif #BUILD_TARGET
